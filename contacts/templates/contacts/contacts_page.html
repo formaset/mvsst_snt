@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="section">
+    <div class="container">
+      <h1>{{ page.title }}</h1>
+      <div class="contacts-grid">
+        <div class="contacts-info">
+          {% if page.full_name %}<h3>{{ page.full_name }}</h3>{% endif %}
+          {% if page.short_name %}<p><strong>Сокращенное наименование:</strong> {{ page.short_name }}</p>{% endif %}
+          {% if page.phone %}<p><strong>Телефон:</strong> <a href="tel:{{ page.phone }}">{{ page.phone }}</a></p>{% endif %}
+          {% if page.email %}<p><strong>Email:</strong> <a href="mailto:{{ page.email }}">{{ page.email }}</a></p>{% endif %}
+          {% if page.legal_address %}
+            <p><strong>Юридический адрес:</strong> <a href="https://yandex.ru/maps/?text={{ page.legal_address|urlencode }}" target="_blank" rel="noopener">{{ page.legal_address }}</a></p>
+          {% endif %}
+          {% if page.actual_address %}
+            <p><strong>Фактический адрес:</strong> <a href="https://yandex.ru/maps/?text={{ page.actual_address|urlencode }}" target="_blank" rel="noopener">{{ page.actual_address }}</a></p>
+          {% endif %}
+          {% if page.work_hours %}<p><strong>График работы:</strong> {{ page.work_hours }}</p>{% endif %}
+        </div>
+        <div class="contacts-map">
+          {% if page.yandex_embed_src %}
+            <iframe src="{{ page.yandex_embed_src }}" width="100%" height="320" frameborder="0" allowfullscreen></iframe>
+          {% else %}
+            <div class="map-placeholder">Добавьте карту Яндекс в админке.</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

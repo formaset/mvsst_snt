@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags %}
+
+{% block content %}
+  <section class="section">
+    <div class="container">
+      <h1>{{ page.title }}</h1>
+      {% if page.intro %}<p>{{ page.intro }}</p>{% endif %}
+      <div class="card-grid">
+        {% for award in awards %}
+          <div class="card award-card" data-lightbox>
+            {% if award.image %}
+              {% image award.image fill-360x240 class="card-image" %}
+              <img class="lightbox-source" src="{{ award.image.file.url }}" alt="{{ award.title }}" hidden>
+            {% else %}
+              <div class="card-image placeholder"></div>
+            {% endif %}
+            <div class="card-body">
+              <h3>{{ award.title }}</h3>
+              <p>{{ award.description }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-content">
+      <button class="lightbox-close" type="button">×</button>
+      <img src="" alt="">
+    </div>
+  </div>
+{% endblock %}

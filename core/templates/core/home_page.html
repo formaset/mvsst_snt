@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+  {% if page.body %}
+    {% for block in page.body %}
+      {% include_block block %}
+    {% endfor %}
+  {% endif %}
+
+  {% if about_page %}
+  <section class="section section-accent">
+    <div class="container two-column">
+      <div>
+        <h2>Об организации</h2>
+        <p>{{ about_page.specific.intro|truncatechars:320 }}</p>
+        <a class="button" href="{{ about_page.url }}">Подробнее</a>
+      </div>
+      <div class="accent-panel">
+        <h3>Миссия</h3>
+        <p>{{ about_page.specific.mission }}</p>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Последние новости</h2>
+        {% if news_index_page %}<a class="text-link" href="{{ news_index_page.url }}">Все новости</a>{% endif %}
+      </div>
+      <div class="news-grid">
+        {% for item in latest_news %}
+          <article class="news-card">
+            {% if item.cover_image %}
+              {% image item.cover_image fill-360x240 class="news-card-image" %}
+            {% endif %}
+            <div class="news-card-body">
+              <div class="news-date">{{ item.publish_date|date:"d.m.Y" }}</div>
+              <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+              {% if item.lead %}<p>{{ item.lead }}</p>{% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

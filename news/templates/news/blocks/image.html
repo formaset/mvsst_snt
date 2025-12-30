@@ -1,0 +1,5 @@
+{% load wagtailimages_tags %}
+<figure class="article-image">
+  {% image value.image fill-960x540 %}
+  {% if value.caption %}<figcaption>{{ value.caption }}</figcaption>{% endif %}
+</figure>

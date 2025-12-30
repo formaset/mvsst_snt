@@ -1,0 +1,60 @@
+{% load static wagtailuserbar %}
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ page.title }} | АНО «МосводостокСтройТрест»{% endblock %}</title>
+    <meta name="description" content="АНО по развитию городской среды «МосводостокСтройТрест».">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Unbounded:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body>
+    {% wagtailuserbar %}
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/">
+          <span class="brand-mark">МСТ</span>
+          <span class="brand-text">АНО «МосводостокСтройТрест»</span>
+        </a>
+        <nav class="main-nav">
+          <div class="nav-item dropdown">
+            <a class="nav-link" href="{% if about_page %}{{ about_page.url }}{% else %}#{% endif %}">Организация</a>
+            <div class="dropdown-menu">
+              {% if about_page %}<a href="{{ about_page.url }}">Об организации</a>{% endif %}
+              {% if leadership_page %}<a href="{{ leadership_page.url }}">Руководство</a>{% endif %}
+              {% if evaluation_page %}<a href="{{ evaluation_page.url }}">Оценка деятельности организации</a>{% endif %}
+            </div>
+          </div>
+          {% if news_index_page %}<a class="nav-link" href="{{ news_index_page.url }}">Новости</a>{% endif %}
+          <a class="nav-link" href="https://hh.ru/employer/11611956" target="_blank" rel="noopener">Вакансии</a>
+          {% if contacts_page %}<a class="nav-link" href="{{ contacts_page.url }}">Контакты</a>{% endif %}
+        </nav>
+        <button class="nav-toggle" aria-label="Открыть меню">☰</button>
+      </div>
+    </header>
+
+    <main class="site-main">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>
+          <div class="footer-title">АНО «МосводостокСтройТрест»</div>
+          <div class="footer-subtitle">Развитие городской среды Москвы</div>
+        </div>
+        <div class="footer-links">
+          {% if contacts_page %}<a href="{{ contacts_page.url }}">Контакты</a>{% endif %}
+          {% if news_index_page %}<a href="{{ news_index_page.url }}">Новости</a>{% endif %}
+        </div>
+      </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>

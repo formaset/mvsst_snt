@@ -1,0 +1,12 @@
+:root {
+  --wagtail-color-primary: #002f6c;
+  --wagtail-color-secondary: #9bcbeb;
+}
+
+.w-header {
+  background: #002f6c;
+}
+
+.w-logo {
+  font-family: "Unbounded", system-ui, sans-serif;
+}

@@ -1,0 +1,10 @@
+<section class="section">
+  <div class="container">
+    {% if value.heading %}<h2>{{ value.heading }}</h2>{% endif %}
+    <ul class="directions">
+      {% for item in value.items %}
+        <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>

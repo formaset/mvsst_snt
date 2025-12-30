@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block title %}{{ page.title }} | Новости{% endblock %}
+
+{% block extra_head %}
+  <meta property="og:title" content="{{ page.title }}">
+  <meta property="og:description" content="{{ page.lead }}">
+  {% if page.cover_image %}{% image page.cover_image fill-1200x630 as og_image %}
+    <meta property="og:image" content="{{ og_image.url }}">
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <section class="section">
+    <div class="container article">
+      <div class="news-date">{{ page.publish_date|date:"d.m.Y" }}</div>
+      <h1>{{ page.title }}</h1>
+      {% if page.lead %}<p class="lead">{{ page.lead }}</p>{% endif %}
+      {% if page.cover_image %}
+        {% image page.cover_image fill-960x540 class="article-cover" %}
+      {% endif %}
+      <div class="article-body">
+        {% for block in page.body %}
+          {% include_block block %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}
