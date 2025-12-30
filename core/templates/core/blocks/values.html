@@ -1,0 +1,13 @@
+<section class="section section-accent">
+  <div class="container">
+    {% if value.heading %}<h2>{{ value.heading }}</h2>{% endif %}
+    <div class="value-list">
+      {% for item in value.items %}
+        <div class="value-card">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

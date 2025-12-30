@@ -1,0 +1,8 @@
+{% load wagtailimages_tags %}
+<div class="gallery">
+  {% for image in value.images %}
+    <div class="gallery-item">
+      {% image image fill-360x240 %}
+    </div>
+  {% endfor %}
+</div>

@@ -1,0 +1,22 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<section class="section">
+  <div class="container">
+    {% if value.heading %}<h2>{{ value.heading }}</h2>{% endif %}
+    <div class="news-grid">
+      {% for page in value.news %}
+        {% with page=page.specific %}
+          <article class="news-card">
+            {% if page.cover_image %}
+              {% image page.cover_image fill-360x240 class="news-card-image" %}
+            {% endif %}
+            <div class="news-card-body">
+              <div class="news-date">{{ page.publish_date|date:"d.m.Y" }}</div>
+              <h3><a href="{{ page.url }}">{{ page.title }}</a></h3>
+              {% if page.lead %}<p>{{ page.lead }}</p>{% endif %}
+            </div>
+          </article>
+        {% endwith %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

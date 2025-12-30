@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+  <section class="section">
+    <div class="container">
+      <h1>{{ page.title }}</h1>
+      <div class="rich-text">
+        {{ page.intro|linebreaks }}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-accent">
+    <div class="container">
+      <h2>Миссия</h2>
+      <p>{{ page.mission }}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Ценности</h2>
+      <div class="value-list">
+        {% for value in page.values %}
+          <div class="value-card">
+            <h3>{{ value.value.title }}</h3>
+            <p>{{ value.value.text }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Направления деятельности</h2>
+      <ul class="directions">
+        {% for item in page.directions %}
+          <li>{{ item.value }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+
+  {% if page.body %}
+    {% for block in page.body %}
+      {% include_block block %}
+    {% endfor %}
+  {% endif %}
+{% endblock %}

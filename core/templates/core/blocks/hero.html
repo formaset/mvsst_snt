@@ -1,0 +1,16 @@
+{% load wagtailimages_tags %}
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <h1>{{ value.title }}</h1>
+      {% if value.text %}<p>{{ value.text }}</p>{% endif %}
+    </div>
+    <div class="hero-media">
+      {% if value.image %}
+        {% image value.image fill-720x480 class="hero-image" %}
+      {% else %}
+        <div class="hero-placeholder">Фото проекта</div>
+      {% endif %}
+    </div>
+  </div>
+</section>

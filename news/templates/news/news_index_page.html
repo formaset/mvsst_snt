@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags %}
+
+{% block content %}
+  <section class="section">
+    <div class="container">
+      <h1>{{ page.title }}</h1>
+      {% if page.intro %}<p>{{ page.intro }}</p>{% endif %}
+      <div class="news-grid">
+        {% for item in news_items %}
+          <article class="news-card">
+            {% if item.cover_image %}
+              {% image item.cover_image fill-360x240 class="news-card-image" %}
+            {% endif %}
+            <div class="news-card-body">
+              <div class="news-date">{{ item.publish_date|date:"d.m.Y" }}</div>
+              <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+              {% if item.lead %}<p>{{ item.lead }}</p>{% endif %}
+            </div>
+          </article>
+        {% empty %}
+          <p>Новости пока не опубликованы.</p>
+        {% endfor %}
+      </div>
+      <div class="pagination">
+        {% if has_prev %}
+          <a href="?page={{ page|add:'-1' }}">Назад</a>
+        {% endif %}
+        <span>Страница {{ page }}</span>
+        {% if has_next %}
+          <a href="?page={{ page|add:'1' }}">Вперёд</a>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endblock %}
